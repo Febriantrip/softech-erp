@@ -1,0 +1,13 @@
+/* V9 Advanced Distribution only. Existing V7/V8 visual system remains untouched. */
+.v9-quality-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; padding:14px; }
+.v9-quality-grid > div { min-width:0; padding:12px 13px; border:1px solid var(--border); border-radius:11px; background:rgba(255,255,255,.016); }
+.v9-quality-grid span,.v9-quality-grid strong { display:block; }
+.v9-quality-grid span { color:var(--muted); font-size:7.5px; margin-bottom:5px; }
+.v9-quality-grid strong { font-size:9px; overflow:hidden; text-overflow:ellipsis; }
+.v9-return-flow { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+.v9-return-flow > div { padding:10px 11px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,.014); }
+.v9-return-flow span,.v9-return-flow strong { display:block; }
+.v9-return-flow span { color:var(--muted); font-size:7px; }
+.v9-return-flow strong { margin-top:4px; font-size:8.5px; }
+@media (max-width:900px){.v9-quality-grid{grid-template-columns:1fr 1fr}.v9-return-flow{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.v9-quality-grid,.v9-return-flow{grid-template-columns:1fr}}

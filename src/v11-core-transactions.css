@@ -1,0 +1,10 @@
+/* V11 isolated production-core additions. Existing approved V9/V10 style files are untouched. */
+.v11-mode-banner { display:flex; align-items:center; gap:10px; margin-bottom:12px; padding:11px 13px; border:1px solid rgba(92,115,255,.18); border-radius:13px; background:linear-gradient(135deg,rgba(95,112,255,.055),rgba(83,205,223,.035)); }
+.v11-mode-banner > svg { flex:0 0 auto; color:#7182ff; }
+.v11-mode-banner > div { min-width:0; flex:1; }
+.v11-mode-banner strong,.v11-mode-banner span { display:block; }
+.v11-mode-banner strong { font-size:8.5px; letter-spacing:.08em; }
+.v11-mode-banner span { margin-top:3px; color:var(--muted); font-size:8px; line-height:1.45; }
+.v11-row-actions { min-width:150px; flex-wrap:nowrap; }
+.v11-row-actions .btn { white-space:nowrap; }
+@media (max-width:900px){ .v11-mode-banner{align-items:flex-start;flex-wrap:wrap}.v11-mode-banner .btn{margin-left:26px}.v11-row-actions{min-width:0;flex-wrap:wrap} }

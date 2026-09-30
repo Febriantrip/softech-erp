@@ -1,0 +1,3 @@
+/* V12 only: additive helpers. Existing approved V9/V10/V11 visual system is untouched. */
+.v12-api-alert { padding: 11px 13px; margin-bottom: 12px; border-color: rgba(220, 94, 94, .18); color: #9b4451; font-size: 9px; }
+.v12-subledger-toggle { margin: 0 0 12px; width: max-content; }

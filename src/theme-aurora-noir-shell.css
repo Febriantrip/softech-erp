@@ -1,0 +1,187 @@
+/* SOFTECH ERP / Noir Shell + Hover Rail
+   Imported AFTER theme-aurora-dark.css. No inline styles or altered business modules.
+   Dark palette is neutral charcoal; Aurora is reserved for actions and active navigation. */
+
+/* Sidebar hierarchy, available in both light and dark mode. */
+.sidebar .brand { gap: 9px; }
+.sidebar .brand__identity { min-width: 0; flex: 1; white-space: nowrap; }
+.sidebar .sidebar-pin {
+  display: grid;
+  place-items: center;
+  flex: 0 0 27px;
+  width: 27px;
+  height: 29px;
+  margin-left: auto;
+  border-radius: 9px;
+  opacity: .76;
+  background: transparent;
+}
+.sidebar .sidebar-pin:hover { opacity: 1; }
+.sidebar .sidebar-section-label {
+  margin: 11px 1px 4px;
+  padding: 10px 9px 3px;
+  border-top: 1px solid var(--border);
+  letter-spacing: .17em;
+}
+.sidebar .sidebar-section-label:first-child {
+  margin-top: 0;
+  padding-top: 5px;
+  border-top: 0;
+}
+.sidebar .nav-item > svg:first-child,
+.sidebar .nav-child > svg:first-child { flex-shrink: 0; }
+
+/* Desktop-only minimize state. The parent shell and sidebar expand together:
+   topbar and content are reflowed, never covered by the open navigation. */
+@media (min-width: 901px) {
+  .sidebar {
+    transition: width .23s cubic-bezier(.22, .8, .23, 1),
+                background-color .2s ease, border-color .2s ease;
+  }
+  .app-main { min-width: 0; transition: margin-left .23s cubic-bezier(.22, .8, .23, 1); }
+  .app-shell--sidebar-collapsed .app-main { margin-left: 92px; }
+  .app-shell--sidebar-collapsed.app-shell--sidebar-peek .app-main { margin-left: 264px; }
+  .sidebar.sidebar--collapsed { width: 64px; }
+  .sidebar.sidebar--collapsed.sidebar--peek { width: 236px; }
+
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) {
+    padding-inline: 7px;
+  }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .brand {
+    justify-content: center;
+    padding-inline: 0;
+    gap: 0;
+  }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .brand__identity,
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .sidebar-pin,
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .nav-item > span,
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .nav-item > b,
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .nav-chevron,
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .nav-children,
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .fiscal-card > div {
+    display: none;
+  }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .sidebar-nav { padding-right: 0; }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .sidebar-section-label {
+    height: 12px;
+    margin: 8px 4px 4px;
+    padding: 0;
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    color: transparent;
+    font-size: 0;
+    line-height: 0;
+  }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .sidebar-section-label:first-child {
+    height: 0;
+    margin: 0;
+    border-top: 0;
+  }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .nav-item,
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .nav-parent {
+    justify-content: center;
+    min-height: 39px;
+    padding: 0;
+    gap: 0;
+  }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .nav-item > svg:first-child {
+    width: 19px;
+    height: 19px;
+  }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .sidebar-footer {
+    padding-top: 8px;
+  }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .fiscal-card {
+    justify-content: center;
+    min-height: 41px;
+    padding: 7px 0;
+  }
+  .sidebar.sidebar--collapsed:not(.sidebar--peek) .fiscal-card .dot {
+    flex: 0 0 8px;
+  }
+}
+
+/* Real mobile/touch navigation retains the original overlay + close button.
+   Hover-rail behavior never applies at mobile widths. */
+@media (max-width: 900px) {
+  .sidebar .sidebar-pin { display: none; }
+  .sidebar.sidebar--collapsed { width: 236px; }
+  .app-shell--sidebar-collapsed .app-main { margin-left: 0; }
+}
+
+/* Dark-only neutral noir finish. Light Aurora palette is deliberately untouched. */
+:root[data-theme='dark'] {
+  --bg: #111315;
+  --bg-soft: #16181B;
+  --panel: #1B1D20;
+  --panel-strong: #22252A;
+  --panel-hover: #292C32;
+  --surface: #1B1D20;
+  --surface-soft: #22252A;
+  --surface-strong: #2B2E35;
+  --border: #303339;
+  --border-strong: #42454E;
+  --text: #F2F3F6;
+  --muted: #A4AAB4;
+  --muted-2: #858D9A;
+}
+html[data-theme='dark'],
+html[data-theme='dark'] body,
+html[data-theme='dark'] #root { background-color: #111315; }
+html[data-theme='dark'] .sidebar,
+html[data-theme='dark'] .topbar {
+  background: #111316;
+  border-color: #303238;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+}
+html[data-theme='dark'] .sidebar .brand,
+html[data-theme='dark'] .sidebar .sidebar-section-label,
+html[data-theme='dark'] .sidebar-footer { border-color: #2A2D32; }
+html[data-theme='dark'] .sidebar .sidebar-pin { color: #B4BAC5; }
+html[data-theme='dark'] .sidebar .sidebar-pin:hover {
+  background: #24262D;
+  color: #F2F3F6;
+}
+html[data-theme='dark'] .sidebar .nav-item,
+html[data-theme='dark'] .sidebar .nav-parent,
+html[data-theme='dark'] .sidebar .nav-child { color: #BBC1CC; }
+html[data-theme='dark'] .sidebar :is(.nav-item, .nav-parent, .nav-child):hover {
+  color: #F1F1F6;
+  background: #23252C;
+}
+html[data-theme='dark'] .sidebar :is(.nav-item.active, .nav-parent.active-parent, .nav-child.active) {
+  color: #F1EFFD;
+  background: rgba(131, 111, 245, .14);
+  box-shadow: none;
+}
+html[data-theme='dark'] .sidebar .nav-child.active {
+  box-shadow: inset 2px 0 #8C76FF;
+}
+html[data-theme='dark'] .sidebar :is(.nav-item.active, .nav-parent.active-parent, .nav-child.active) > svg:first-child {
+  color: #998AFF;
+}
+html[data-theme='dark'] .sidebar .fiscal-card {
+  background: #1C1E23;
+  border: 1px solid #2A2D32;
+}
+html[data-theme='dark'] .global-search {
+  background: #1D2025;
+  border-color: #31343B;
+}
+html[data-theme='dark'] .global-search:focus-within { background: #25282E; }
+html[data-theme='dark'] :is(.surface-card, .section-card, .modal-card) {
+  background: #1B1D20;
+  border-color: #33363E;
+}
+html[data-theme='dark'] .data-table thead { background: #23262B; }
+html[data-theme='dark'] .data-table tbody tr:hover { background: #24272D; }
+html[data-theme='dark'] .theme-switch { background: #22252A; }
+html[data-theme='dark'] .theme-switch__thumb { background: #464951; }
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .sidebar.sidebar--collapsed.sidebar--peek { width: 210px; }
+  .app-shell--sidebar-collapsed.app-shell--sidebar-peek .app-main { margin-left: 238px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .app-main { transition-duration: .01ms; }
+}

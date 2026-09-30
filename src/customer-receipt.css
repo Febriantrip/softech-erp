@@ -1,0 +1,30 @@
+/* D3-E only: customer receipt + AR aging. Aurora tokens from global theme. */
+.d3e-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:18px}
+.d3e-full{grid-column:1/-1}
+.d3e-allocations{display:grid;gap:10px;margin:14px 0}
+.d3e-allocations h4{margin:0;font-size:15px}
+.d3e-allocations p{margin:0;color:var(--muted)}
+.d3e-allocation{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding:13px;border-radius:12px;border:1px solid var(--border);background:var(--surface-soft,rgba(255,255,255,.025))}
+.d3e-invoice-check{display:flex;align-items:center;gap:12px;min-width:200px;flex:1}
+.d3e-invoice-check input{width:18px;height:18px;accent-color:var(--primary)}
+.d3e-invoice-check span{display:grid;gap:4px}
+.d3e-invoice-check small{color:var(--muted);font-size:12px}
+.d3e-allocation>.field{width:180px;max-width:100%}
+.d3e-totals{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px;border:1px solid var(--border);border-radius:12px;margin-top:12px}
+.d3e-totals .field{max-width:220px}
+.d3e-totals>div{display:grid;gap:3px;text-align:right}
+.d3e-totals small{color:var(--muted)}
+.d3e-totals strong{font-size:18px}
+.d3e-error{color:var(--danger);padding:11px 14px;border:1px solid var(--danger);border-radius:10px;font-size:13px}
+.d3e-success{padding:12px 16px;margin-bottom:14px;border-color:var(--success);color:var(--success)}
+.d3e-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:8px 0 18px}
+.d3e-summary>div{display:grid;gap:4px;border:1px solid var(--border);border-radius:10px;padding:12px}
+.d3e-summary small{color:var(--muted)}
+.d3e-search{display:flex;gap:8px;margin:0 0 12px}
+.d3e-search input{flex:1;min-width:0;padding:11px;border-radius:10px;border:1px solid var(--border);background:var(--surface-soft,rgba(255,255,255,.03));color:var(--text)}
+.d3e-aging{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:15px 0}
+.d3e-aging button{border:1px solid var(--border);border-radius:12px;padding:12px;background:var(--surface-soft,rgba(255,255,255,.025));text-align:left;cursor:pointer}
+.d3e-aging button[aria-pressed="true"]{border-color:var(--primary);background:rgba(109,124,255,.13)}
+.d3e-aging small{display:block;color:var(--muted);margin-bottom:7px}
+.d3e-aging strong{font-size:17px}
+@media(max-width:820px){.d3e-form,.d3e-summary{grid-template-columns:1fr}.d3e-full{grid-column:auto}.d3e-aging{grid-template-columns:repeat(2,minmax(0,1fr))}.d3e-totals{flex-wrap:wrap}}

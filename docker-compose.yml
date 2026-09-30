@@ -1,0 +1,101 @@
+services:
+  postgres:
+    image: ${POSTGRES_IMAGE:-postgres:18-alpine}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-nexa_erp}
+      POSTGRES_USER: ${POSTGRES_USER:-nexa}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      PGDATA: ${POSTGRES_PGDATA:-/var/lib/postgresql/18/docker}
+      TZ: Asia/Jakarta
+    ports:
+      - "${POSTGRES_PORT_HOST:-5432}:5432"
+    volumes:
+      - nexa_postgres18_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nexa} -d ${POSTGRES_DB:-nexa_erp}"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    restart: unless-stopped
+
+  migrate:
+    image: ${POSTGRES_IMAGE:-postgres:18-alpine}
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    volumes:
+      - ./backend/migrations:/migrations:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: >-
+      sh -c 'for f in /migrations/*.sql; do echo "Applying $$f"; psql -v ON_ERROR_STOP=1 -h postgres -U ${POSTGRES_USER:-nexa} -d ${POSTGRES_DB:-nexa_erp} -f "$$f"; done'
+    restart: "no"
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory-policy", "noeviction"]
+    ports:
+      - "${REDIS_PORT_HOST:-6379}:6379"
+    volumes:
+      - nexa_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./backend
+    environment:
+      APP_ENV: ${APP_ENV:-development}
+      HTTP_ADDR: :8080
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-http://localhost:5173,http://localhost:8088}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-nexa_erp}
+      POSTGRES_USER: ${POSTGRES_USER:-nexa}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
+      JWT_ISSUER: nexa-erp
+      JWT_TTL: 8h
+      BOOTSTRAP_USERNAME: ${BOOTSTRAP_USERNAME:-admin}
+      BOOTSTRAP_PASSWORD: ${BOOTSTRAP_PASSWORD:-admin-change-me}
+      BOOTSTRAP_NAME: ${BOOTSTRAP_NAME:-ERP Administrator}
+      BOOTSTRAP_ROLES: ${BOOTSTRAP_ROLES:-GROUP_ADMIN}
+      BOOTSTRAP_ENTITIES: ${BOOTSTRAP_ENTITIES:-NDU,NDT}
+      BOOTSTRAP_SITES: ${BOOTSTRAP_SITES:-JKT-HO,CKR-DC,TGR-WH,SBY-BR,GRK-WH}
+    ports:
+      - "${API_PORT_HOST:-8080}:8080"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/api/v1/health/live"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        VITE_API_BASE_URL: /api/v1
+        VITE_DATA_MODE: api
+    ports:
+      - "${FRONTEND_PORT_HOST:-8088}:80"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  nexa_postgres18_data:
+  nexa_redis_data:

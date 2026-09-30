@@ -1,0 +1,58 @@
+# Dependencies / build output
+node_modules/
+dist/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+!.env.development.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Local Python face-recognition pilot
+backend/face/.venv/
+backend/face/models/
+backend/face/__pycache__/
+*.py[cod]
+
+# Local patch / backup artifacts
+_patch_backups/
+_d1_owner_hotfix_backups/
+_d1_sales_backups/
+_face_patch_backups/
+_login_v2_backups/
+_login_viewport_backups/
+_patch_logs/
+patch-logs/
+*.dump
+
+# Logs / editor / OS
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Go / test artifacts
+*.test
+coverage.out
+
+# Local development / historical patch artifacts
+PATCH_*.txt
+POSTGRESQL18_VALIDATION_REPORT.txt
+V*_VALIDATION_REPORT.txt
+V7_0_*_HOTFIX*.txt
+V7_STYLE_PRESERVATION_REPORT.txt
+V7_VALIDATION_AFTER_UPLOAD.txt
+REPAIR_README.txt
+GITHUB_PUBLISHING.md
+POSTGRESQL18_PATCH_NOTES.txt
+# Legacy stack helper scripts
+START_V*_STACK.bat
+STOP_V*_STACK.bat
+
+# Local credential helper
+SET_ACCOUNT_PASSWORD.cmd
+SET_ACCOUNT_PASSWORD.ps1

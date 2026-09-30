@@ -1,0 +1,298 @@
+/* SOFTECH ERP / Aurora Dark Matte visual layer (v12.1).
+   Imported last. Approved Aurora light CSS and layout files remain untouched.
+   The same persisted light/dark switch selects this neutral-charcoal palette. */
+
+/* Two-option pill, placed between search and notifications by ThemeSwitch. */
+.theme-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 74px;
+  width: 74px;
+  height: 36px;
+  padding: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 999px;
+  background: #23262C;
+  color: #7d8594;
+  cursor: pointer;
+  isolation: isolate;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.theme-switch:hover { border-color: rgba(168,173,255,.48); }
+.theme-switch__thumb {
+  position: absolute;
+  z-index: 0;
+  top: 3px;
+  left: 3px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #414650;
+  box-shadow: 0 2px 6px rgba(0,0,0,.24);
+  transition: transform .24s cubic-bezier(.2,.8,.2,1), background-color .2s ease;
+}
+.theme-switch--dark .theme-switch__thumb { transform: translateX(38px); background: #494E59; }
+.theme-switch__icon {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  transition: color .2s ease;
+}
+.theme-switch:not(.theme-switch--dark) .theme-switch__icon--sun { color: #ffe3a1; }
+.theme-switch--dark .theme-switch__icon--moon { color: #f6f7ff; }
+.theme-switch:focus-visible { outline: 2px solid #79dce9; outline-offset: 3px; }
+
+/* Palette. All text/surface variables in existing modules update together. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #111318;
+  --bg-soft: #181B21;
+  --panel: #1B1E25;
+  --panel-strong: #232730;
+  --panel-hover: #2B303A;
+  --border: #30343F;
+  --border-strong: #414653;
+  --text: #F1F3F8;
+  --text-soft: #D1D5DE;
+  --muted: #A1A8B6;
+  --muted-2: #818A9A;
+  --primary: #9998FF;
+  --primary-2: #799EFF;
+  --primary-3: #B5A0FF;
+  --cyan: #79D2D6;
+  --success: #72D7B0;
+  --warning: #F4C47E;
+  --danger: #FF8B9F;
+  --info: #91B3FF;
+  --shadow: 0 12px 34px rgba(0,0,0,.14);
+  --shadow-float: 0 28px 74px rgba(0,0,0,.46);
+  --surface: #1B1E25;
+  --surface-strong: #292D36;
+  --surface-soft: #232730;
+  --accent-soft: rgba(143,140,255,.14);
+  --accent-soft-2: rgba(121,158,255,.11);
+  background: var(--bg);
+  color: var(--text);
+}
+
+html[data-theme='dark'],
+html[data-theme='dark'] body,
+html[data-theme='dark'] #root { background-color: var(--bg); color: var(--text); }
+html[data-theme='dark'] body {
+  background: var(--bg);
+}
+html[data-theme='dark'] body::before {
+  opacity: 0;
+  background-image: none;
+}
+html[data-theme='dark'] :is(button, input, select, textarea) { color: var(--text); }
+html[data-theme='dark'] .theme-switch { color: #A1A8B6; }
+html[data-theme='dark'] :is(input, textarea)::placeholder { color: var(--muted-2); }
+html[data-theme='dark'] :is(.sidebar, .topbar) {
+  border-color: var(--border);
+  background: #191C23;
+  box-shadow: 0 8px 26px rgba(0,0,0,.12);
+}
+html[data-theme='dark'] :is(.brand strong, .profile-chip strong, .fiscal-card strong) { color: var(--text); }
+html[data-theme='dark'] :is(.nav-item, .nav-parent, .nav-child) { color: var(--muted); }
+html[data-theme='dark'] :is(.nav-item, .nav-parent, .nav-child):hover {
+  color: var(--text);
+  background: var(--surface-soft);
+}
+html[data-theme='dark'] :is(.nav-item.active, .nav-parent.active-parent, .nav-child.active) {
+  color: #f6f5ff;
+  background: rgba(141,138,255,.15);
+  box-shadow: none;
+}
+html[data-theme='dark'] :is(.nav-item.active svg, .nav-parent.active-parent > svg:first-child) { color: var(--primary); }
+html[data-theme='dark'] .sidebar-label { color: var(--muted-2); }
+html[data-theme='dark'] .nav-item--addon b { color: var(--cyan); }
+html[data-theme='dark'] .global-search {
+  color: var(--muted);
+  background: #232730;
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+}
+html[data-theme='dark'] .global-search:focus-within { background: #292D36; }
+html[data-theme='dark'] .select-wrap select option,
+html[data-theme='dark'] .field select option { background: #232730; color: var(--text); }
+html[data-theme='dark'] :is(.icon-button, .mobile-menu, .profile-chip, kbd) {
+  border-color: var(--border);
+  background: var(--surface-soft);
+  color: var(--muted);
+}
+html[data-theme='dark'] :is(.icon-button:hover, .mobile-menu:hover) {
+  color: var(--primary);
+  background: var(--accent-soft);
+}
+html[data-theme='dark'] .avatar { color: white; background: linear-gradient(135deg, #5764da, #7f70e4); }
+
+/* Cards, workspaces, document lists, advanced distribution, finance and dialogs. */
+html[data-theme='dark'] :is(
+  .surface-card, .section-card, .process-flow-card, .core-master-card,
+  .purchase-command-center, .warehouse-command-center, .modal-card
+) {
+  color: var(--text);
+  border-color: var(--border);
+  background: #1B1E25;
+  box-shadow: 0 10px 30px rgba(0,0,0,.10);
+}
+html[data-theme='dark'] :is(.stat-card h3, .section-card__header h3, .page-header h1) { color: var(--text); }
+html[data-theme='dark'] :is(.data-table thead, .master-tabs) { background: #232730; }
+html[data-theme='dark'] .data-table td { color: var(--text-soft); }
+html[data-theme='dark'] .data-table tbody tr:hover { background: #252A33; }
+html[data-theme='dark'] :is(.filter-strip, .finance-mini-strip > div, .invoice-source-preview > div, .finance-kpi) {
+  border-color: var(--border);
+  background: #232730;
+  box-shadow: none;
+}
+html[data-theme='dark'] :is(
+  .flow-step, .catalog-item, .master-tile, .addon-card, .report-card,
+  .purchase-command-grid > button, .warehouse-command-grid button,
+  .inline-form, .line-editor-row, .governance-role-list > button,
+  .governance-permission-grid > label, .governance-policy-card,
+  .v9-quality-grid > div, .v9-return-flow > div,
+  .v10-stack-flow > div, .v10-health-row
+) {
+  border-color: var(--border);
+  background: var(--surface-soft);
+  color: var(--text);
+}
+html[data-theme='dark'] :is(.flow-step, .catalog-item, .master-tile, .addon-card, .report-card, .purchase-command-grid > button, .warehouse-command-grid button):hover {
+  background: #292D36;
+}
+html[data-theme='dark'] :is(.doc-totals, .ar-footer-actions, .modal-footer) {
+  border-color: var(--border);
+  background: #20232A;
+}
+html[data-theme='dark'] :is(.field input, .field select, .field textarea, .table-input) {
+  border-color: var(--border-strong);
+  background: #232730;
+  color: var(--text);
+  box-shadow: inset 0 1px rgba(255,255,255,.03);
+}
+html[data-theme='dark'] :is(.field input, .field select, .field textarea, .table-input):focus {
+  background: #2B3039;
+  border-color: rgba(155,150,255,.53);
+  box-shadow: 0 0 0 3px rgba(155,150,255,.10);
+}
+html[data-theme='dark'] .modal-backdrop { background: rgba(7,8,11,.77); }
+html[data-theme='dark'] .modal-card { background: #1B1E25; box-shadow: var(--shadow-float); }
+html[data-theme='dark'] .fiscal-card { background: #292D38; }
+html[data-theme='dark'] .segmented button.active { color: var(--text); background: var(--surface-strong); }
+html[data-theme='dark'] .btn { color: var(--text); border-color: var(--border); background: var(--surface-soft); }
+html[data-theme='dark'] .btn:hover { background: var(--surface-strong); }
+html[data-theme='dark'] .btn-primary,
+html[data-theme='dark'] .btn-primary:hover { color: white; border: 0; background: linear-gradient(135deg, #353e8a, #786ff1 62%, #538ee9); }
+html[data-theme='dark'] .btn-ghost { color: var(--text-soft); background: var(--surface-soft); }
+html[data-theme='dark'] .table-link { color: var(--primary); }
+html[data-theme='dark'] .table-link:hover { color: #c1c1ff; }
+html[data-theme='dark'] .status-pill.warning { color: var(--warning); background: rgba(255,199,121,.11); }
+html[data-theme='dark'] :is(.toast, .balance-ok) { color: var(--success); background: rgba(88,221,173,.07); }
+html[data-theme='dark'] :is(.warning-card, .inventory-warning strong) { color: var(--warning); }
+html[data-theme='dark'] .lifecycle-step.done small { color: var(--success); }
+html[data-theme='dark'] .v12-api-alert { color: var(--danger); }
+html[data-theme='dark'] .governance-approval-flow > span.done { color: var(--success); }
+html[data-theme='dark'] .governance-priority.p-medium { background: var(--warning); }
+html[data-theme='dark'] .notification-dot { box-shadow: 0 0 0 3px rgba(121,178,255,.11); }
+
+
+/* Matte finishing for secondary surfaces that use hard-coded Aurora glass. */
+html[data-theme='dark'] :is(.page-container, .app-shell, .app-main) {
+  color: var(--text);
+}
+html[data-theme='dark'] :is(.sidebar, .topbar, .surface-card, .section-card, .modal-card) {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+html[data-theme='dark'] .sidebar {
+  background: #191C23;
+  border-color: #30343F;
+}
+html[data-theme='dark'] .topbar {
+  background: #191C23;
+  border-color: #30343F;
+}
+html[data-theme='dark'] .sidebar-nav {
+  scrollbar-color: #414653 transparent;
+}
+html[data-theme='dark'] .sidebar-nav::-webkit-scrollbar-thumb {
+  background: #414653;
+}
+html[data-theme='dark'] .selector > span,
+html[data-theme='dark'] .eyebrow,
+html[data-theme='dark'] :is(.data-table th, .field > span, .finance-mini-strip span, .invoice-source-preview span, .finance-kpi span) {
+  color: #A1A8B6;
+}
+html[data-theme='dark'] .select-wrap select { color: var(--text); }
+html[data-theme='dark'] :is(.global-search, .icon-button, .icon-btn, .table-input) {
+  border-color: var(--border);
+}
+html[data-theme='dark'] :is(.icon-btn, .icon-button, .global-search, kbd) {
+  background: #232730;
+}
+html[data-theme='dark'] :is(.icon-btn, .icon-button):hover {
+  background: #2B303A;
+}
+html[data-theme='dark'] :is(.doc-totals, .modal-footer, .ar-footer-actions, .master-tabs, .data-table thead) {
+  background: #232730;
+}
+html[data-theme='dark'] .data-table th,
+html[data-theme='dark'] .data-table td {
+  border-bottom-color: var(--border);
+}
+html[data-theme='dark'] .data-table tbody tr:hover { background: #252A33; }
+html[data-theme='dark'] :is(.line-editor-row, .inline-form, .flow-step, .master-tile, .quick-action, .report-card, .catalog-item) {
+  background: #232730;
+  border-color: var(--border);
+}
+html[data-theme='dark'] :is(.line-editor-row, .inline-form, .flow-step, .master-tile, .quick-action, .report-card, .catalog-item):hover {
+  background: #292D36;
+}
+html[data-theme='dark'] :is(.v10-health-row, .v9-quality-grid > div, .v9-return-flow > div) {
+  background: #232730;
+  border-color: var(--border);
+}
+html[data-theme='dark'] :is(.attention-item, .inventory-count-preview, .closing-row, .transfer-route > div) {
+  border-color: var(--border);
+}
+html[data-theme='dark'] .segmented { background: #232730; }
+html[data-theme='dark'] .segmented button.active { background: #363B46; }
+html[data-theme='dark'] .lifecycle-step > span {
+  color: var(--muted);
+  background: #232730;
+  border-color: var(--border-strong);
+}
+html[data-theme='dark'] .lifecycle-step.done > span {
+  color: #101916;
+  background: var(--success);
+  border-color: var(--success);
+}
+html[data-theme='dark'] .lifecycle-line { background: var(--border-strong); }
+html[data-theme='dark'] .audit-dot { background: #282B3D; border-color: #414653; }
+html[data-theme='dark'] .status-pill.neutral { color: #CBD0DA; background: #30333E; }
+html[data-theme='dark'] .status-pill.info { color: #B6ADFF; background: rgba(143,140,255,.16); }
+html[data-theme='dark'] .status-pill.success { color: #72D7B0; background: rgba(114,215,176,.12); }
+html[data-theme='dark'] .fiscal-card { background: #292D38; }
+html[data-theme='dark'] .theme-switch {
+  border-color: #444953;
+  background: #23262C;
+}
+html[data-theme='dark'] .theme-switch__thumb { background: #494E59; }
+
+@media (max-width: 640px) {
+  .theme-switch { flex-basis: 66px; width: 66px; height: 34px; }
+  .theme-switch__thumb { width: 26px; height: 26px; }
+  .theme-switch__icon { flex-basis: 26px; width: 26px; height: 26px; }
+  .theme-switch--dark .theme-switch__thumb { transform: translateX(32px); }
+  .topbar-actions { gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch, .theme-switch__thumb, .theme-switch__icon { transition: none; }
+}
