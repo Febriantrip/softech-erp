@@ -173,7 +173,7 @@ See [docs/POSTGRESQL_18_BASELINE.md](docs/POSTGRESQL_18_BASELINE.md).
 
 The backend uses PostgreSQL transactions for critical commands. Current transaction flows include idempotency controls and locking/version checks where concurrent mutation matters. Financial posting and operational transaction rules are implemented in the Go domain layer and PostgreSQL migrations.
 
-Additional implementation notes are available in [docs/](docs/).
+Browse the organized documentation index at [docs/README.md](docs/README.md), including architecture, module scope, PostgreSQL baseline, Aurora UI notes, and version milestones.
 
 ## Development status
 
