@@ -8,6 +8,7 @@ This directory contains architecture notes, module scope, version milestones, da
 - [Module Scope](module-scope.md)
 - [PostgreSQL 18 Baseline](POSTGRESQL_18_BASELINE.md)
 - [Aurora UI System](AURORA_UI.md)
+- [Local User Setup Example](LOCAL_USER_SETUP.sql)
 
 ## Evolution milestones
 
